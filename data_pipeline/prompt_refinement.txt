@@ -1,0 +1,62 @@
+TASK:
+Evaluate a set of UI instructions to determine if they are accurate and unambiguous.
+ROLE:
+You are an expert AI assistant specializing in GUI analysis and instruction verification. Your task is to meticulously analyze a set of five instructions and determine if each one accurately and uniquely identifies a specific target UI element within a provided screenshot. Any factual inaccuracy in an instruction's description automatically disqualifies it.
+INPUT:
+GUI Screenshot: An image of a user interface.
+Target Element: A single UI element highlighted with a red bounding box for your reference. This is the ground-truth target. 
+Instruction Set: A JSON object containing five different English instructions to be evaluated.
+CRITICAL RULE:
+The red bounding box is a annotation for your reference; it does not exist in the original image. Your analysis must not refer to the bounding box in any way (e.g., do not mention "the red box" or "the highlighted element").
+IMPORTANT:
+If the red bounding box contains a lot of items, which make the bbox not accurate, such as it contains "Open File" and "Open Directory", set all instructions to false.
+OUTPUT PROCESS (TWO STEPS):
+Step 1: Chain-of-Thought Analysis
+First, articulate your step-by-step reasoning. For each of the five instructions, perform the following two-part analysis:
+Accuracy Check:
+Quote the instruction.
+Directly compare every descriptive detail mentioned in the instruction (e.g., text, icon, color, position, function) against the actual target element.
+If there are any discrepancies or factual errors, state them clearly. An instruction is only accurate if it perfectly matches the target element.
+Uniqueness Check:
+Scan the entire screen to see if any other element could also match the instruction's description.
+An instruction is only unique if it points exclusively to the correct target element.
+Verdict:
+Based on the checks above, conclude with a clear verdict. The instruction is valid (is_unique: true) only if it is both 100% accurate and unique. Otherwise, it is invalid (is_unique: false).
+Step 2: Final JSON Output
+After completing the analysis for all five instructions, provide the final summary as a single, well-formed JSON object. This must be the very last part of your response.
+JSON Structure:
+```json
+{
+  "ori_instruction": {
+    "reasoning": "<A concise summary of your analysis. If false, clearly state the specific inaccuracy or ambiguity.",
+    "is_unique": <true_or_false>
+  },
+  "appearance_instruction": {
+    "reasoning": "<A concise summary of your analysis. If false, clearly state the specific inaccuracy or ambiguity.>",
+    "is_unique": <true_or_false>
+  },
+  "function_instruction": {
+    "reasoning": "<A concise summary of your analysis. If false, clearly state the specific inaccuracy or ambiguity.>",
+    "is_unique": <true_or_false>
+  },
+  "spatial_instruction": {
+    "reasoning": "<A concise summary of your analysis. If false, clearly state the specific inaccuracy or ambiguity.>",
+    "is_unique": <true_or_false>
+  },
+  "goal_instruction": {
+    "reasoning": "<A concise summary of your analysis. If false, clearly state the specific inaccuracy or ambiguity.>",
+    "is_unique": <true_or_false>
+  }
+}
+```
+Now, please perform this two-step evaluation for the following data.
+Instruction Set:
+```json
+{
+  "ori_instruction": "<ori_instruction_here>",
+  "appearance_instruction": "<app_instruction_here>",
+  "function_instruction": "<fun_instruction_here>",
+  "spatial_instruction": "<spa_instruction_here>",
+  "goal_instruction": "<goa_instruction_here>"
+}
+```

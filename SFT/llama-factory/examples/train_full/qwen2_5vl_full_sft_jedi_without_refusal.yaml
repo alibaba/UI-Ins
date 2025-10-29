@@ -1,0 +1,59 @@
+### model
+model_name_or_path: /primus_datasets/models/Qwen2.5-VL-3B-Instruct
+image_max_pixels: 3211264 # 262144 * 14 * 14(4096 tokens)
+video_max_pixels: 16384
+trust_remote_code: true
+
+### method
+stage: sft
+do_train: true
+finetuning_type: full
+freeze_vision_tower: true
+freeze_multi_modal_projector: true
+freeze_language_model: false
+deepspeed: examples/deepspeed/ds_z3_config.json
+accelerator_config:
+  dispatch_batches: false
+
+### dataset
+dataset: seeclick_ui_tars_cleaned_fixed_jedi, android_control-v2_jedi, coat-v2_jedi, guiact-web-multi_jedi, guiact-web-single-v2_jedi, guide_si_10k-v2_jedi, guienv_jedi, mind2web_train_v1.0.1_jedi, omniact_jedi, ricoig16k_jedi, ricosca_jedi, ui_refexp_jedi, webui350k_jedi, widget_captioning_jedi, component_final_1.5m_cleaned_split_jedi, component_library_snap_icon_data_description_jedi, component_library_snap_icon_data_grounding_jedi, component_v1_130k_jedi, doc_data_new_jedi, doc_scroll_data_new_jedi, ethercalc_v1_jedi, slide_v1_17k_jedi, icon_v0222_description_jedi, ios_app_data_jedi, mac_app_data_jedi, training_data_icon_jedi, icon_v0222_grounding_jedi, training_data_icon_grounded_merged_jedi, layout200k_jedi, layout200k_grounding_jedi, layout400k_claude_jedi, layout400k_claude_grounding_jedi, os_layout_v1_jedi, os_layout_v1_grounding_jedi
+template: qwen2_vl
+cutoff_len: 8192
+max_length: 8192
+overwrite_cache: true
+preprocessing_num_workers: 24
+dataloader_num_workers: 24
+streaming: true  # 启用流式处理
+preprocessing_batch_size: 128  # 设置预处理批次大小
+buffer_size: 200  # 设置缓冲区大小
+max_samples: null  # 设置为 null 表示处理所有数据
+mix_strategy: interleave_over #表示数据全部使用，过采样，在代码中设置为按照数据量设置采样比例，除非设置了interleave_probs
+
+### output
+output_dir: /primus_oss/save_checkpoint/
+logging_steps: 10
+save_steps: 4000
+plot_loss: true
+overwrite_output_dir: true
+save_only_model: false
+report_to: tensorboard  # choices: [none, wandb, tensorboard, swanlab, mlflow]
+logging_dir: /primus_oss/summary
+
+
+### train gbs = 128 (32 * 4)
+per_device_train_batch_size: 2
+gradient_accumulation_steps: 2
+learning_rate: 1.0e-5
+max_steps: 20000 # 
+# num_train_epochs: 3.0
+lr_scheduler_type: cosine
+warmup_ratio: 0.1
+bf16: true
+ddp_timeout: 180000000
+resume_from_checkpoint: null
+
+### eval
+# val_size: 0.1
+# per_device_eval_batch_size: 1
+# eval_strategy: steps
+# eval_steps: 500

@@ -1,0 +1,49 @@
+## Task:
+Generate and Translate Unambiguous Grounding Instructions
+## Input:
+GUI Screenshot: An image of a user interface.
+Original Instruction: An initial English instruction.
+Highlighted Element: A visual marker (e.g., a red <annotation_type>) on the screenshot pointing to the target UI element.
+--- CORE OBJECTIVE ---
+Your primary task is to first translate the Original Instruction into high-quality Chinese, and then generate four new, distinct types of grounding instructions. For all generated instructions, you must adhere to this critical rule: the instruction must correspond to one and only one element on the entire screen—the one highlighted. Clarity and uniqueness are the top priorities.
+--- IMPORTANT SAFEGUARD ---
+The <annotation_type> is a ground-truth annotation provided only for your reference. Your instructions must never refer to the annotation itself. 
+It is noticeable that the original instruction may can not align with the ground-truth annotation, you should follow the ground-truth annotation first.
+## Instructions Generation Requirements:
+Generate one new, clear, and unambiguous instruction for each of the following four categories.
+Appearance-Based:
+A direct and literal description of the element's visual characteristics (e.g., its text, icon, color, shape). Combine features as needed to ensure the description is completely unique.
+Function-Based:
+A clear description of the element's purpose or the immediate outcome of interacting with it (e.g., "the button used to confirm and save your profile changes").
+Spatial-Based:
+An instruction that identifies the element based on its position relative to other prominent, easily identifiable UI elements (landmarks). The described spatial relationship must lead to a unique location.
+Goal-Based:
+A concise phrase that describes the user's ultimate goal or intent. The user must infer which single UI element on the screen fulfills this goal.
+## Output Format:
+The final output must be a single, well-formed JSON object. The JSON structure should begin with the original instruction and its translation, followed by the newly generated instructions.
+JSON Structure Example:
+Scenario: A login screen where the blue "Log In" button is highlighted. The provided original instruction is "Click the button to log in".
+```json
+{
+  "original_instruction": {
+    "en": "Click the button to log in"
+  },
+  "generated_instructions": {
+    "appearance_based": {
+      "en": "Click the blue button with the text 'Log In'."
+    },
+    "function_based": {
+      "en": "Submit credentials to sign into the account."
+    },
+    "spatial_based": {
+      "en": "Select the button located below the 'Password' field."
+    },
+    "goal_based": {
+      "en": "Access my account now.",
+    }
+  }
+}
+```
+Now, please process the following inputs and generate the instructions in the specified JSON format.
+Original Instruction:
+<instruction_here>
