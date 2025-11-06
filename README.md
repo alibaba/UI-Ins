@@ -105,7 +105,7 @@ print(f"Instruction: {INSTRUCTION}")
 print(f"Raw Response: {raw_response}")
 
 if point_x != -1:
-    _, _, resized_height, resized_width = inputs['pixel_values'].shape
+    resized_height, resized_width = inputs['pixel_values'].shape
     norm_x = point_x / resized_width
     norm_y = point_y / resized_height
     
