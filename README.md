@@ -118,7 +118,7 @@ print("="*48)
 
 ## 📮 Contact
 
-Fell free to contact `liangyuchen@ruc.edu.cn` if you have any questions.
+Feel free to contact `liangyuchen@ruc.edu.cn` if you have any questions.
 
 ## License
 
