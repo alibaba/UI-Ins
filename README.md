@@ -1,5 +1,5 @@
 <div align="center">
-<h1>Welcome to Tongyi-MiA!</h1>
+<h1>Welcome to Tongyi-MAI!</h1>
   <h1>UI-Ins: Enhancing GUI Grounding with Multi-Perspective Instruction-as-Reasoning</h1> 
   
     
