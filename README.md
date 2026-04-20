@@ -127,14 +127,11 @@ This repo follows CC-BY-NC-SA 4.0 license. Please use this repo for non-commerci
 ## Citation
 If you use this repository or find it helpful in your research, please cite it as follows:
 ```bibtex
-@misc{chen2025uiinsenhancingguigrounding,
-      title={UI-Ins: Enhancing GUI Grounding with Multi-Perspective Instruction-as-Reasoning}, 
-      author={Liangyu Chen and Hanzhang Zhou and Chenglin Cai and Jianan Zhang and Panrong Tong and Quyu Kong and Xu Zhang and Chen Liu and Yuqi Liu and Wenxuan Wang and Yue Wang and Qin Jin and Steven Hoi},
-      year={2025},
-      eprint={2510.20286},
-      archivePrefix={arXiv},
-      primaryClass={cs.CV},
-      url={https://arxiv.org/abs/2510.20286}, 
+@article{chen2025ui,
+  title={UI-Ins: Enhancing GUI Grounding with Multi-Perspective Instruction-as-Reasoning},
+  author={Chen, Liangyu and Zhou, Hanzhang and Cai, Chenglin and Zhang, Jianan and Tong, Panrong and Kong, Quyu and Zhang, Xu and Liu, Chen and Liu, Yuqi and Wang, Wenxuan and others},
+  journal={arXiv preprint arXiv:2510.20286},
+  year={2025}
 }
 ```
 
